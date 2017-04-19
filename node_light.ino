@@ -13,13 +13,17 @@
 void setup() {
   Serial.begin(115200);
   init_led_strip();
+  init_pir();
   init_wifi();
 }
 
 void loop() {
   state_loop();
   osc_message_pump();
-  
+
+  bool sensorState = read_pir();
+  // @NOTE doing nothing with this yet
+
   if(updated) {
     FastLED.show();
     updated = false;
