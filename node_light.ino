@@ -6,6 +6,7 @@
 #include "wifisettings.h"
 
 #include "led_stuff.h"
+#include "pir_stuff.h"
 #include "osc_stuff.h"
 #include "wifi_stuff.h"
 

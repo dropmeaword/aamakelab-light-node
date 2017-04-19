@@ -1,3 +1,4 @@
+int calibrationTime = 3;
 int pirPin = 5;    //the digital pin connected to the PIR sensor's output
 
 int event = 0;
@@ -7,7 +8,6 @@ float waitms = 1000/sampleRate;
 
 void init_pir(){
   pinMode(pirPin, INPUT);
-  pinMode(ledPin, OUTPUT);
   digitalWrite(pirPin, LOW);
 
   //give the sensor some time to calibrate
