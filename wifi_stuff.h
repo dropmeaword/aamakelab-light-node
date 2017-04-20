@@ -21,7 +21,7 @@ Serial.println();
   Udp.begin(rxport);
 
   Serial.println("Starting UDP");
-  Serial.print("Local port: ");
+  Serial.print("Listening on port: ");
   Serial.println(Udp.localPort());
 
   device_id = thisip[3];

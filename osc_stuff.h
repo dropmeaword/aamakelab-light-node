@@ -4,14 +4,14 @@ Metro alive = Metro(5000);
 void state_loop() {
   // send alive ACK message to show-control
   if(alive.check()) {
-    OSCMessage out("/mirror/ack");
+    Serial.println("SENDING ACK");
+    OSCMessage out("/node/ack");
     out.add( device_id );
     Udp.beginPacket(dest, txport);
     out.send(Udp);
     Udp.endPacket();
     out.empty();
   }
-
 }
 
 void on_gradient(OSCMessage &msg, int addrOffset) {
@@ -48,11 +48,11 @@ void osc_message_pump() {
     }
 
     if(!in.hasError()) {
-      in.route("/node/gradient", on_gradient);
-      in.route("/node/solid", on_solid);
-      in.route("/node/testpattern", on_testpattern);
-      in.route("/node/pixels", on_pixels);
-      in.route("/node/off", on_off);
+      in.route("/node/gradient", on_gradient);  // r,g,b,r,g,b
+      in.route("/node/solid", on_solid);   // r,g,b
+      in.route("/node/testpattern", on_testpattern);   // <void>
+      in.route("/node/pixels", on_pixels);   // [r,g,b x 36]
+      in.route("/node/off", on_off); // <void>
     }
   } // if
 }

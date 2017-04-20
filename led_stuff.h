@@ -1,4 +1,3 @@
-#define FASTLED_ESP8266_RAW_PIN_ORDER
 #include "FastLED.h"
 
 #define NUM_STRIPS 1
@@ -13,6 +12,7 @@ CRGB leds[NUM_STRIPS * NUM_LEDS_PER_STRIP];
 boolean updated, once = false;
 
 void init_led_strip() {
+  Serial.println("initialize LED strip");
   FastLED.addLeds<APA102, DATA_PIN, CLOCK_PIN, BGR>(leds, NUM_LEDS);
 }
 
