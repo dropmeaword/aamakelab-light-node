@@ -14,15 +14,33 @@ boolean updated, once = false;
 void init_led_strip() {
   Serial.println("initialize LED strip");
   FastLED.addLeds<APA102, DATA_PIN, CLOCK_PIN, BGR>(leds, NUM_LEDS);
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds[i].r = 0;
+    leds[i].g = 0;
+    leds[i].b = 0;
+  }
 }
 
 void paint_one_color(CRGB col) {
-  Serial.println("SINGLE COLOR");
   for(int i = 0; i < NUM_LEDS; i++) {
     leds[i] = col;
   }
+  FastLED.show();
+}
 
-  updated = true;
+void paint_testpattern() {
+  paint_one_color(CRGB::Red);
+  FastLED.show();
+  delay(1000);
+  paint_one_color(CRGB::Green);
+  FastLED.show();
+  delay(1000);
+  paint_one_color(CRGB::Blue);
+  FastLED.show();
+  delay(1000);
+  paint_one_color(CRGB::White);
+  FastLED.show();
+  delay(1000);
 }
 
 void paint_gradient(CRGB a, CRGB b) {

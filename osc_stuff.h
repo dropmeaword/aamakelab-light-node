@@ -4,7 +4,7 @@ Metro alive = Metro(5000);
 void state_loop() {
   // send alive ACK message to show-control
   if(alive.check()) {
-    Serial.println("SENDING ACK");
+//    Serial.println("SENDING ACK");
     OSCMessage out("/node/ack");
     out.add( device_id );
     Udp.beginPacket(dest, txport);
@@ -15,24 +15,54 @@ void state_loop() {
 }
 
 void on_gradient(OSCMessage &msg, int addrOffset) {
-  Serial.println(">> CMD: gradient");
-  // CHANGE THE LED VALUES AND DO FASTLED.SHOW()
+  CRGB a, b;
+  
+  a.r = msg.getInt(0);
+  a.g = msg.getInt(1);
+  a.b = msg.getInt(2);
+
+  b.r = msg.getInt(3);
+  b.g = msg.getInt(4);
+  b.b = msg.getInt(5);
+
+  Serial.print("[");
+  Serial.print(a.r);
+  Serial.print(",");
+  Serial.print(a.g);
+  Serial.print(",");
+  Serial.print(a.b);
+  Serial.print("] -> [");
+  Serial.print(b.r);
+  Serial.print(",");
+  Serial.print(b.g);
+  Serial.print(",");
+  Serial.print(b.b);
+  Serial.println("]");
+//  Serial.println("[" + a.r + ", " + a.g + ", " +  a.b + "]"); // -> ["+ b.r +", " + b.g + ", " + b.b + "]");
+
+  //paint_gradient(a, b);
 }
 
 void on_testpattern(OSCMessage &msg, int addrOffset) {
-  Serial.println(">> CMD: test pattern");
+  paint_testpattern();
 }
 
 void on_solid(OSCMessage &msg, int addrOffset) {
-  Serial.println(">> CMD: solid");
+  CRGB inc;
+  
+  if( msg.isInt(0) && msg.isInt(1) && msg.isInt(2) ) {
+    inc.r = msg.getInt(0);
+    inc.g = msg.getInt(1);
+    inc.b = msg.getInt(2);
+    paint_one_color( inc );
+  }
 }
 
 void on_pixels(OSCMessage &msg, int addrOffset) {
-  Serial.println(">> CMD: pixels");
 }
 
 void on_off(OSCMessage &msg, int addrOffset) {
-  Serial.println(">> CMD: OFF");
+  paint_one_color( CRGB::Black );
 }
 
 void osc_message_pump() {
@@ -53,6 +83,8 @@ void osc_message_pump() {
       in.route("/node/testpattern", on_testpattern);   // <void>
       in.route("/node/pixels", on_pixels);   // [r,g,b x 36]
       in.route("/node/off", on_off); // <void>
+    } else {
+      Serial.println("message has an error");
     }
   } // if
 }

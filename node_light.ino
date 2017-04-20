@@ -16,6 +16,9 @@ void setup() {
   init_wifi();
   init_led_strip();
   init_pir();
+
+  paint_testpattern();
+  paint_one_color(CRGB::Black);
 }
 
 void loop() {
@@ -24,9 +27,4 @@ void loop() {
 
 //  bool sensorState = read_pir();
   // @NOTE doing nothing with this yet
-
-  if(updated) {
-    FastLED.show();
-    updated = false;
-  }
 }
