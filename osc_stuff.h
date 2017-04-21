@@ -1,5 +1,7 @@
 Metro alive = Metro(5000);
 
+int values[NUM_LEDS*3];
+
 
 void state_loop() {
   // send alive ACK message to show-control
@@ -72,6 +74,18 @@ void on_solid(OSCMessage &msg, int addrOffset) {
 }
 
 void on_pixels(OSCMessage &msg, int addrOffset) {
+  Serial.println("<< on pixels");
+  if( msg.isInt(0) ) {
+    for(int i = 0; i < NUM_LEDS*3; i++) {
+      values[i] = msg.getInt(i);
+    }
+  } else {
+    for(int i = 0; i < NUM_LEDS*3; i++) {
+      values[i] = (int)msg.getFloat(i);
+    }
+  }
+
+  paint_screen( values );
 }
 
 void on_off(OSCMessage &msg, int addrOffset) {
@@ -84,7 +98,7 @@ void osc_message_pump() {
 
   if( (size = Udp.parsePacket()) > 0)
   {
-    Serial.println("processing OSC package");
+    //Serial.println("processing OSC package");
     // parse incoming OSC message
     while(size--) {
       in.fill( Udp.read() );

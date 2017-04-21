@@ -99,6 +99,12 @@ void paint_gradient(CRGB a, CRGB b) {
 }
 
 void paint_screen(int *values) {
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds[i].r = values[i*3];
+    leds[i].g = values[(i*3)+1];
+    leds[i].b = values[(i*3)+2];
+  }
+  FastLED.show();
 }
 
 
