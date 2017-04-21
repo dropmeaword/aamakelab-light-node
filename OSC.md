@@ -16,7 +16,7 @@ Specific to the nodes of the installation:
 |/node/off|(n.a.)|turn node off|
 |/node/testpattern|(n.a.)|run test pattern on node|
 |/node/solid|i:r i:g i:b|paint the whole node in one color|
-|/node/solid|i:r i:g i:b|paint the whole node in one color|
+|/node/gradient|i:r0 i:g0 i:b0 i:r1 i:g1 i:b1|paint the whole node in one color|
 |/node/pixels|i:r0 i:g0 i:b0 .... i:r35 i:g35 i:b35 | applies rgb values to all 36 pixels in a node|
 
 str:"rrr,ggg,bbb"
