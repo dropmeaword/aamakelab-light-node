@@ -1,5 +1,5 @@
 int calibrationTime = 3;
-int pirPin = 5;    //the digital pin connected to the PIR sensor's output
+int pirPin = D7;    //the digital pin connected to the PIR sensor's output
 
 int event = 0;
 

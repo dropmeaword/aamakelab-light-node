@@ -90,6 +90,8 @@ void paint_testpattern() {
   paint_one_color(CRGB::White);
   FastLED.show();
   delay(1000);
+  paint_one_color(CRGB::Black);
+  FastLED.show();
 }
 
 void paint_gradient(CRGB a, CRGB b) {

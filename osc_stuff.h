@@ -6,7 +6,7 @@ int values[NUM_LEDS*3];
 void state_loop() {
   // send alive ACK message to show-control
   if(alive.check()) {
-//    Serial.println("SENDING ACK");
+    Serial.println("SENDING ACK");
     OSCMessage out("/node/ack");
     out.add( device_id );
     Udp.beginPacket(dest, txport);
@@ -14,6 +14,16 @@ void state_loop() {
     Udp.endPacket();
     out.empty();
   }
+}
+
+void osc_dispatch_sensor() {
+  Serial.println("SENDING SENSOR");
+  OSCMessage out("/node/sensor");
+  out.add( device_id );
+  Udp.beginPacket(dest, txport);
+  out.send(Udp);
+  Udp.endPacket();
+  out.empty();
 }
 
 void on_gradient(OSCMessage &msg, int addrOffset) {

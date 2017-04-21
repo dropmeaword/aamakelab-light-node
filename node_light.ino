@@ -10,6 +10,11 @@
 #include "osc_stuff.h"
 #include "wifi_stuff.h"
 
+// sampling rate of sensor
+Metro canRead = Metro(20); // in ms
+
+bool sensorState = false;
+bool lastState = true;
 
 void setup() {
   Serial.begin(115200);
@@ -25,6 +30,13 @@ void loop() {
   state_loop();
   osc_message_pump();
 
-//  bool sensorState = read_pir();
-  // @NOTE doing nothing with this yet
+  // check if it's time to check the sensor
+  if( canRead.check() ) {
+    sensorState = read_pir();
+    if( (lastState == false) && (sensorState == true) ) {
+      // sensor has detected movement
+      osc_dispatch_sensor();
+    }
+    lastState = sensorState;
+  } // if
 }
