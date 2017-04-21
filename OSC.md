@@ -25,4 +25,7 @@ int:rrr int:ggg int:bbb
 
 
 this is what Grasshopper seems to do:
-/0/Panel string:(this actually a parameter not THE command)
+`/0/Panel node_nr /node/solid str:r,g,b` -> `/node/solid i:r i:g i:b`
+`/0/Panel node_nr /node/testpattern` -> `/node/testpattern`
+`/0/Panel node_nr /node/gradient str:r0,g0,b0,r1,g1,b1` -> `/node/gradient i:r0 i:g0 i:b0 i:r1 i:g1 i:b1`
+`/0/Panel node_nr /node/pixels str:ar,ag,ab,br,bg,bb` -> `/node/gradient i:ar i:ag i:ab i:br i:bg i:bb`

@@ -16,7 +16,7 @@ void state_loop() {
 
 void on_gradient(OSCMessage &msg, int addrOffset) {
   CRGB a, b;
-  
+
   a.r = msg.getInt(0);
   a.g = msg.getInt(1);
   a.b = msg.getInt(2);
@@ -40,7 +40,7 @@ void on_gradient(OSCMessage &msg, int addrOffset) {
   Serial.println("]");
 //  Serial.println("[" + a.r + ", " + a.g + ", " +  a.b + "]"); // -> ["+ b.r +", " + b.g + ", " + b.b + "]");
 
-  //paint_gradient(a, b);
+  paint_gradient(a, b);
 }
 
 void on_testpattern(OSCMessage &msg, int addrOffset) {
