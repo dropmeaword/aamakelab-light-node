@@ -17,28 +17,37 @@ void state_loop() {
 void on_gradient(OSCMessage &msg, int addrOffset) {
   CRGB a, b;
 
-  a.r = msg.getInt(0);
-  a.g = msg.getInt(1);
-  a.b = msg.getInt(2);
+  if( msg.isInt(0) ) {
+    a.r = msg.getInt(0);
+    a.g = msg.getInt(1);
+    a.b = msg.getInt(2);
+  
+    b.r = msg.getInt(3);
+    b.g = msg.getInt(4);
+    b.b = msg.getInt(5);
+  } else {
+    a.r = (int)msg.getFloat(0);
+    a.g = (int)msg.getFloat(1);
+    a.b = (int)msg.getFloat(2);
+  
+    b.r = (int)msg.getFloat(3);
+    b.g = (int)msg.getFloat(4);
+    b.b = (int)msg.getFloat(5);
+  }
 
-  b.r = msg.getInt(3);
-  b.g = msg.getInt(4);
-  b.b = msg.getInt(5);
-
-  Serial.print("[");
-  Serial.print(a.r);
-  Serial.print(",");
-  Serial.print(a.g);
-  Serial.print(",");
-  Serial.print(a.b);
-  Serial.print("] -> [");
-  Serial.print(b.r);
-  Serial.print(",");
-  Serial.print(b.g);
-  Serial.print(",");
-  Serial.print(b.b);
-  Serial.println("]");
-//  Serial.println("[" + a.r + ", " + a.g + ", " +  a.b + "]"); // -> ["+ b.r +", " + b.g + ", " + b.b + "]");
+//  Serial.print("[");
+//  Serial.print(a.r);
+//  Serial.print(",");
+//  Serial.print(a.g);
+//  Serial.print(",");
+//  Serial.print(a.b);
+//  Serial.print("] -> [");
+//  Serial.print(b.r);
+//  Serial.print(",");
+//  Serial.print(b.g);
+//  Serial.print(",");
+//  Serial.print(b.b);
+//  Serial.println("]");
 
   paint_gradient(a, b);
 }
@@ -54,8 +63,12 @@ void on_solid(OSCMessage &msg, int addrOffset) {
     inc.r = msg.getInt(0);
     inc.g = msg.getInt(1);
     inc.b = msg.getInt(2);
-    paint_one_color( inc );
+  } else {
+    inc.r = (int)msg.getFloat(0);
+    inc.g = (int)msg.getFloat(1);
+    inc.b = (int)msg.getFloat(2);
   }
+  paint_one_color( inc );
 }
 
 void on_pixels(OSCMessage &msg, int addrOffset) {
