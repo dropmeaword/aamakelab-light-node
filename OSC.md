@@ -31,10 +31,9 @@ this is what Grasshopper seems to do:
 |Grasshopper|Processing|
 |---------|---------|
 |`/0/Panel /node/solid str:node.x,node.y r,g,b`|`/node/solid i:r i:g i:b`|
-|`/0/Panel node_xy /node/testpattern str:nodex,nodeyy`|`/node/solid i:r i:g i:b`|
-|`/node/testpattern`|`/0/Panel node_xy /node/gradient str:nodex,nodeyy r0,g0,b0,r1,g1,b1` -> `/node/gradient i:r0 i:g0 i:b0 i:r1 i:g1 i:b1`
-
-`/0/Panel node_xy /node/pixels str:nodex,nodeyy ar,ag,ab,br,bg,bb` -> `/node/gradient i:ar i:ag i:ab i:br i:bg i:bb`
+|`/0/Panel node_xy /node/testpattern str:nodex,nodeyy`|`/node/testpattern`|
+|`/0/Panel node_xy /node/gradient str:nodex,nodeyy r0,g0,b0,r1,g1,b1`|`/node/gradient i:r0 i:g0 i:b0 i:r1 i:g1 i:b1`|
+|`/0/Panel node_xy /node/pixels str:nodex,nodeyy ar,ag,ab,br,bg,bb`|`/node/gradient i:ar i:ag i:ab i:br i:bg i:bb`|
 
 
 #### Example
